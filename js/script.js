@@ -1,16 +1,21 @@
 import { tmpData } from "./emoji.js";
 
-let data = tmpData.map((elem) => {
-  let keywordsSet = new Set(elem.keywords.split(" "));
-  let keywordsArray = Array.from(keywordsSet);
-  return {
-    title: elem.title,
-    symbol: elem.symbol,
-    keywords: keywordsArray.join(" "),
-  };
-});
+let data;
 const headerInput = document.createElement("input");
 const mainCardsBlock = document.createElement("div");
+
+//Фильтрация повторений в data.keywords
+function dataFilter() {
+  data = tmpData.map((elem) => {
+    let keywordsSet = new Set(elem.keywords.split(" "));
+    let keywordsArray = Array.from(keywordsSet);
+    return {
+      title: elem.title,
+      symbol: elem.symbol,
+      keywords: keywordsArray.join(" "),
+    };
+  });
+}
 
 //Создание header
 function createHeader() {
@@ -73,6 +78,7 @@ function searchCard() {
   return arrFilter;
 }
 
+dataFilter();
 createHeader();
 showCards();
 //Поиск
