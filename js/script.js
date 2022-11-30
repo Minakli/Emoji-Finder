@@ -3,6 +3,7 @@ import { tmpData } from "./emoji.js";
 let data;
 const headerInput = document.createElement("input");
 const mainCardsBlock = document.createElement("div");
+const main = document.querySelector("main");
 
 //Фильтрация повторений в data.keywords
 function dataFilter() {
@@ -20,26 +21,36 @@ function dataFilter() {
 //Создание header
 function createHeader() {
   const header = document.createElement("header");
-  const divCont = document.createElement("div");
   const h1 = document.createElement("h1");
   const headerP = document.createElement("p");
-  const divInput = document.createElement("div");
-  const contEmogi = document.createElement("div");
-  contEmogi.append(mainCardsBlock);
   document.body.prepend(header);
-  document.body.append(contEmogi);
-  header.prepend(divCont);
-  divCont.append(h1);
-  divCont.append(headerP);
-  divCont.append(divInput);
-  divInput.append(headerInput);
+  header.append(h1);
+  header.append(headerP);
+  header.append(headerInput);
   headerInput.setAttribute("type", "text");
-  headerInput.setAttribute("placeholder", "placeholder");
-  mainCardsBlock.classList.add("main__cards");
-  divCont.className = "container";
-  contEmogi.className = "body__background";
+  headerInput.setAttribute("placeholder", "      Placeholder");
   h1.textContent = "Emoji Finder";
   headerP.textContent = "Find emoji by keywords";
+}
+//Создание main
+function createMain() {
+  const contEmogi = document.createElement("div");
+  const decorLine = document.createElement("div");
+  main.append(contEmogi);
+  contEmogi.className = "body__background";
+  decorLine.className = "decor__line";
+  mainCardsBlock.classList.add("main__cards");
+  contEmogi.append(mainCardsBlock);
+  contEmogi.append(decorLine);
+}
+//Создание footer
+function createFooter() {
+  const footer = document.createElement("footer");
+  const footerText = document.createElement("p");
+  footerText.classList.add("footer__text");
+  footerText.textContent = "2022 © Made with love by me";
+  document.body.append(footer);
+  footer.append(footerText);
 }
 //Создание одной карточки
 function createCard(emo) {
@@ -80,6 +91,8 @@ function searchCard() {
 
 dataFilter();
 createHeader();
+createMain();
+createFooter();
 showCards();
 //Поиск
 headerInput.addEventListener("input", () => {
