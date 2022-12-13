@@ -1,9 +1,16 @@
-import { tmpData } from "./emoji.js";
+// import { tmpData } from "./emoji.js";
 
 let data;
 const headerInput = document.createElement("input");
 const mainCardsBlock = document.createElement("div");
 const main = document.querySelector("main");
+let tmpData = await getEmoji();
+//Получает массив с сервера
+async function getEmoji() {
+  let response = await fetch("https://emoji.ymatuhin.workers.dev/");
+  let data = await response.json();
+  return data;
+}
 
 //Фильтрация повторений в data.keywords
 function dataFilter() {
